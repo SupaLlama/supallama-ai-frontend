@@ -42,7 +42,7 @@ export default function DashboardPageComponent() {
                     <TableHead>Name</TableHead>
                     <TableHead>Type</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead>Last Updated</TableHead>
+                    <TableHead>GitHub Account</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -76,17 +76,17 @@ export default function DashboardPageComponent() {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle>New Application</CardTitle>
+              <CardTitle>New SupaLlama Application</CardTitle>
             </CardHeader>
             <CardContent>
               <form action={createNewApp} className="space-y-4">
                 <div className="space-y-1">
-                  <Label htmlFor="name">Name*</Label>
-                  <Input name="appName" id="name" required placeholder="Enter application name" />
+                  <Label htmlFor="appName">Name*</Label>
+                  <Input name="appName" id="appName" required placeholder="Enter application name" />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="description">Description (optional)</Label>
-                  <Textarea name="appDescription" id="description" placeholder="Enter application description" />
+                  <Label htmlFor="githubUsername">GitHub username for transfer*</Label>
+                  <Input name="githubUsername" id="githubUsername" required placeholder="Enter GitHub username" />
                 </div>
                 <div className="space-y-1">
                   <Label>App Type*</Label>

@@ -18,7 +18,7 @@ export async function createNewApp(formData: FormData) {
     // in practice, you should validate your inputs
     const newAppData = {
       appName: formData.get('appName') as string,
-      appDescription: formData.get('appDescription') as string,
+      appDescription: formData.get('githubUsername') as string,
       appType: formData.get('appType') as string,
     }
     console.log(newAppData)
