@@ -24,7 +24,7 @@ export default function DashboardPageComponent() {
           <span>SupaLlama.ai</span>
         </Link>
         <nav className="flex items-center gap-4">
-          <Link href="#" className="hover:underline" prefetch={false}>
+          <Link href="/signout" className="hover:underline" prefetch={false}>
             Sign Out
           </Link>
         </nav>
