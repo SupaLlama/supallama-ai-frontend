@@ -4,6 +4,8 @@ import { createClient } from '@/utils/supabase/server'
 import { Button } from '@/components/ui/button'
 import { signout } from '../login/actions'
 
+import DashboardPageComponent from '@/components/dashboardPage'
+
 export default async function DashboardPage() {
 
   const supabase = createClient()
@@ -12,11 +14,6 @@ export default async function DashboardPage() {
 
 
   return (
-    <>
-      <p>Hello {data.user?.email}!</p>
-      <form action={signout}>
-        <Button type="submit">Sign Out</Button>
-      </form>
-    </>
+    <DashboardPageComponent />
   )
 }

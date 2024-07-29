@@ -24,7 +24,7 @@ export default function LoginPage() {
             </Link>
           </p>
         </div>
-        <form className="space-y-6" action={login} method="POST">
+        <form className="space-y-6" action={login}>
           <div>
             <Label htmlFor="email" className="sr-only">
               Email address
