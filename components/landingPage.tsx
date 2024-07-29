@@ -27,14 +27,14 @@ export default function LandingPage() {
                 className="inline-flex h-10 items-center justify-center rounded-md bg-indigo-100 px-8 text-sm font-medium text-indigo-500 shadow transition-colors hover:bg-indigo-100/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >
-                Request Invite
+                Request Access
               </Link>
               <Link
-                href="#"
+                href="/login"
                 className="inline-flex h-10 items-center justify-center rounded-md border border-indigo-100 bg-indigo-100/10 px-8 text-sm font-medium text-indigo-100 shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >
-                Sign Up
+                Sign In
               </Link>
             </div>
           </div>
@@ -108,8 +108,9 @@ export default function LandingPage() {
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter text-indigo-900 sm:text-5xl">Supallama Tools</h2>
                 <p className="max-w-[900px] text-indigo-700 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Supallama offers a comprehensive suite of tools to streamline your development workflow and boost
-                  productivity.
+                  Supallama offers a simple set of open source tools to 
+                  generate a starter project in the form of one or more
+                  GitHub repositories!
                 </p>
               </div>
             </div>
@@ -127,16 +128,15 @@ export default function LandingPage() {
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-indigo-900">Code Sandboxes</h3>
                       <p className="text-indigo-700">
-                        Supallama&apos;s CodeSandboxes allow you to quickly 
+                        Supallama&apos;s CodeSandboxes allow you to quickly test out new AI-generated user interfaces without spinning up a development environment.
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
-                      <h3 className="text-xl font-bold text-indigo-900">Project Management</h3>
+                      <h3 className="text-xl font-bold text-indigo-900">Avoid Vendor Lock-in</h3>
                       <p className="text-indigo-700">
-                        Manage your projects, tasks, and team members effortlessly with Supallama&apos;s built-in project
-                        management tools.
+                        SupaLlama&apos;s platform allows you to generate the code for standalone LLM apps that can be run independent of third-party vendors.
                       </p>
                     </div>
                   </li>
@@ -169,9 +169,7 @@ export default function LandingPage() {
               <Card className="flex flex-col justify-between rounded-lg border border-indigo-100 p-6 shadow-sm">
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-indigo-900">Starter</h3>
-                  <p className="text-3xl font-bold">
-                    <del>$19</del> <span className="text-3xl font-bold">$1 (beta)</span>
-                  </p>
+                  <p className="text-6xl font-bold">$19</p>
                   <p className="text-indigo-700">per developer per month</p>
                   <ul className="space-y-2 text-indigo-700">
                     <li>
@@ -180,7 +178,7 @@ export default function LandingPage() {
                     </li>
                     <li>
                       <CheckIcon className="mr-2 inline-block h-4 w-4 text-green-500" />
-                      Basic collaboration tools
+                      Advanced collaboration tools
                     </li>
                     <li>
                       <CheckIcon className="mr-2 inline-block h-4 w-4 text-green-500" />
@@ -191,6 +189,7 @@ export default function LandingPage() {
                 <Button
                   variant="outline"
                   className="mt-6 w-full border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-indigo-100"
+                  disabled
                 >
                   Get Started
                 </Button>
