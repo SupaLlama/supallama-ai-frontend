@@ -39,7 +39,7 @@ export default function LandingPage() {
             </div>
           </div>
           <Image
-            src="/placeholder.svg"
+            src="/supallama-logo.svg"
             width="600"
             height="400"
             alt="Supallama Hero"
@@ -66,19 +66,17 @@ export default function LandingPage() {
                 <ul className="grid gap-6">
                   <li>
                     <div className="grid gap-1">
-                      <h3 className="text-xl font-bold text-indigo-900">Collaborative Coding</h3>
+                      <h3 className="text-xl font-bold text-indigo-900">Test Drive your AI Infra before Coding!</h3>
                       <p className="text-indigo-700">
-                        Supallama&apos;s real-time collaboration tools allow your team to work together seamlessly on the
-                        same codebase.
+                        SupaLlama&apos;s UI allows you to quickly generate, use and benchmark the starter code for AI apps using multiple combinations of GenAI models and software architectures
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="grid gap-1">
-                      <h3 className="text-xl font-bold text-indigo-900">Automated Testing</h3>
+                      <h3 className="text-xl font-bold text-indigo-900">Compatible with v0.dev UIs</h3>
                       <p className="text-indigo-700">
-                        Integrate Supallama&apos;s built-in testing framework to ensure your code is always reliable and
-                        bug-free.
+                        Use v0.dev to quickly generate, copy and paste the UI code for SupaLlama apps that are prebuilt with Next.js and Shadcn/UI.
                       </p>
                     </div>
                   </li>
@@ -86,7 +84,7 @@ export default function LandingPage() {
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-indigo-900">Deployment Automation</h3>
                       <p className="text-indigo-700">
-                        Supallama&apos;s CI/CD tools make it easy to deploy your applications with a single click, ensuring
+                        Supallama&apos;s CI/CD tools make it easy to deploy your AI applications with a single click, ensuring
                         consistent and reliable releases.
                       </p>
                     </div>
@@ -94,7 +92,7 @@ export default function LandingPage() {
                 </ul>
               </div>
               <Image
-                src="/placeholder.svg"
+                src="/supallama-logo.svg"
                 width="550"
                 height="310"
                 alt="Supallama Features"
@@ -103,6 +101,7 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+        
         <section className="w-full py-12 md:py-24 lg:py-32 bg-indigo-50">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -116,7 +115,7 @@ export default function LandingPage() {
             </div>
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
               <Image
-                src="/placeholder.svg"
+                src="/supallama-logo.svg"
                 width="550"
                 height="310"
                 alt="Supallama Tools"
@@ -126,10 +125,9 @@ export default function LandingPage() {
                 <ul className="grid gap-6">
                   <li>
                     <div className="grid gap-1">
-                      <h3 className="text-xl font-bold text-indigo-900">Code Editor</h3>
+                      <h3 className="text-xl font-bold text-indigo-900">Code Sandboxes</h3>
                       <p className="text-indigo-700">
-                        Supallama&apos;s powerful code editor with advanced features like syntax highlighting, code
-                        completion, and real-time collaboration.
+                        Supallama&apos;s CodeSandboxes allow you to quickly 
                       </p>
                     </div>
                   </li>
@@ -172,9 +170,9 @@ export default function LandingPage() {
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-indigo-900">Starter</h3>
                   <p className="text-3xl font-bold">
-                    <del>$19</del> <span className="text-3xl font-bold">$1 beta</span>
+                    <del>$19</del> <span className="text-3xl font-bold">$1 (beta)</span>
                   </p>
-                  <p className="text-indigo-700">per month</p>
+                  <p className="text-indigo-700">per developer per month</p>
                   <ul className="space-y-2 text-indigo-700">
                     <li>
                       <CheckIcon className="mr-2 inline-block h-4 w-4 text-green-500" />
@@ -197,11 +195,11 @@ export default function LandingPage() {
                   Get Started
                 </Button>
               </Card>
-              <Card className="flex flex-col justify-between rounded-lg border border-indigo-100 p-6 shadow-sm opacity-40">
+              <Card className="flex flex-col justify-between rounded-lg border border-indigo-100 p-6 shadow-sm opacity-90">
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-indigo-900">Pro</h3>
                   <p className="text-6xl font-bold">$49</p>
-                  <p className="text-indigo-700">per month</p>
+                  <p className="text-indigo-700">per developer per month</p>
                   <ul className="space-y-2 text-indigo-700">
                     <li>
                       <CheckIcon className="mr-2 inline-block h-4 w-4 text-green-500" />
@@ -220,15 +218,16 @@ export default function LandingPage() {
                 <Button
                   variant="outline"
                   className="mt-6 w-full border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-indigo-100"
+                  disabled
                 >
                   Get Started
                 </Button>
               </Card>
-              <Card className="flex flex-col justify-between rounded-lg border border-indigo-100 p-6 shadow-sm opacity-50">
+              <Card className="flex flex-col justify-between rounded-lg border border-indigo-100 p-6 shadow-sm opacity-90">
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-indigo-900">Enterprise</h3>
                   <p className="text-6xl font-bold">$99</p>
-                  <p className="text-indigo-700">per month</p>
+                  <p className="text-indigo-700">per developer per month</p>
                   <ul className="space-y-2 text-indigo-700">
                     <li>
                       <CheckIcon className="mr-2 inline-block h-4 w-4 text-green-500" />
@@ -247,6 +246,7 @@ export default function LandingPage() {
                 <Button
                   variant="outline"
                   className="mt-6 w-full border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-indigo-100"
+                  disabled
                 >
                   Get Started
                 </Button>
