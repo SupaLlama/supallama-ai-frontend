@@ -89,8 +89,8 @@ export default function DashboardPageComponent() {
                   <Textarea name="appDescription" id="description" placeholder="Enter application description" />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="type">App Type*</Label>
-                  <Select id="type" name="appType">
+                  <Label>App Type*</Label>
+                  <Select name="appType" required>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select an app type" />
                     </SelectTrigger>
