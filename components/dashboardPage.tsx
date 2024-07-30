@@ -6,13 +6,15 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useFormState } from "react-dom"
 
 import Link from "next/link"
 
+import { toast } from 'react-hot-toast'
+
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
@@ -24,6 +26,7 @@ import { createNewApp } from "@/app/dashboard/actions"
 
 import { createClient } from '@/utils/supabase/client'
 
+
 type SupaLlamaApp = {
   app_name: any
   app_status: any
@@ -31,10 +34,26 @@ type SupaLlamaApp = {
   github_username_for_transfer: any
 }
 
+const initialFormState = {
+  message: '',
+  success: false,
+}
 
 export default function DashboardPageComponent() {
-  
   const [supallamaApps, setSupallamaApps] = useState<Array<SupaLlamaApp> | null>(null)
+  const [refreshAppList, setRefreshAppList] = useState(false)
+  
+  const [formState, formAction] = useFormState(createNewApp, initialFormState)
+  
+  
+  const formRef = useRef<HTMLFormElement>(null)
+  
+  if (formRef.current && formState?.success) {
+    toast.success("Successfully created a new app!")
+    formRef.current.reset() 
+  } else if (formState?.message) {
+    toast.error(formState.message)
+  }
   
   useEffect(() => {
     async function fetchSupallamaApps() {
@@ -43,9 +62,6 @@ export default function DashboardPageComponent() {
         .from('supallama_apps')
         .select('app_name, app_type, app_status, github_username_for_transfer')
 
-      console.log('client-side data fetch')
-      console.log(supallama_apps)
-    
       setSupallamaApps(supallama_apps)
     }
     fetchSupallamaApps()
@@ -100,7 +116,7 @@ export default function DashboardPageComponent() {
               <CardTitle>New SupaLlama Application</CardTitle>
             </CardHeader>
             <CardContent>
-              <form action={createNewApp} className="space-y-4">
+              <form ref={formRef} action={formAction} className="space-y-4">
                 <div className="space-y-1">
                   <Label htmlFor="appName">Name*</Label>
                   <Input name="appName" id="appName" required placeholder="Enter application name" />

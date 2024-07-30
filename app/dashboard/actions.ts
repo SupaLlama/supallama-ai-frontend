@@ -4,7 +4,8 @@ import { redirect } from 'next/navigation';
 
 import { createClient } from '@/utils/supabase/server'
 
-export async function createNewApp(formData: FormData) {
+
+export async function createNewApp(prevState: any, formData: FormData) {
   const supabase = createClient();
 
   const { data: auth_user_data , error: error_with_user_auth } = await supabase.auth.getUser()
@@ -69,6 +70,9 @@ export async function createNewApp(formData: FormData) {
       console.log(new_supallama_app)
       
       if (new_supallama_app) {
+        
+        await createAppTemplates(app_name, app_type, github_username_for_transfer)
+
         return {
           message: '',
           success: true,
@@ -87,4 +91,40 @@ export async function createNewApp(formData: FormData) {
       }
     }
   }
+}
+
+export async function createAppTemplates(app_name: string, app_type: string, github_username_for_transfer: string) {
+  if (app_name.trim().length === 0) {
+    return (
+      { message: 'Please enter a valid app name', success: false }
+    )
+  }
+  if (app_type.trim().length === 0) {
+    return (
+      { message: 'Please enter a valid app name', success: false }
+    )
+  }
+  if (github_username_for_transfer.trim().length === 0) {
+    return (
+      { message: 'Please enter a valid app name', success: false }
+    )
+  }
+
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Accept', 'application/json')
+  
+  const supaLlamaAiApiHostPort = process.env.SUPALLAMA_AI_API
+  const request = new Request(
+    `${supaLlamaAiApiHostPort}/github/create-repos-from-templates`, {
+      headers: headers,
+      method: 'POST',
+      mode: 'cors',
+      body: `{ "app_name": "${app_name}", "app_type": "${app_type}", "github_username_for_transfer": "${github_username_for_transfer}"}`
+    }
+  )
+
+  const response = await fetch(request)
+  await response.json()
+  return { errors: { name: '' }, success: true }
 }
