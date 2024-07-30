@@ -7,20 +7,84 @@ import { createClient } from '@/utils/supabase/server'
 export async function createNewApp(formData: FormData) {
   const supabase = createClient();
 
-  const { data , error } = await supabase.auth.getUser()
+  const { data: auth_user_data , error: error_with_user_auth } = await supabase.auth.getUser()
 
-  if (error) {
-    redirect('/error')
+  if (error_with_user_auth) {
+    redirect('/login')
   }
 
-  if (data.user) {
-    // type-casting here for convenience
-    // in practice, you should validate your inputs
-    const newAppData = {
-      appName: formData.get('appName') as string,
-      appDescription: formData.get('githubUsername') as string,
-      appType: formData.get('appType') as string,
+  const { user } = auth_user_data
+
+  if (user) {
+    const app_name = (formData.get('appName') as string).trim()
+    const app_status = 'Initializing'
+    const app_type = (formData.get('appType') as string).trim()
+    const github_username_for_transfer = (formData.get('githubUsername') as string).trim()
+    const user_id = user.id 
+  
+    console.log(app_name)
+    console.log(app_status)
+    console.log(app_type)
+    console.log(github_username_for_transfer)
+    console.log(user_id)
+  
+    // Check if an app with this name already exists
+    try {
+      let { data: supallama_apps_with_same_name, error: error_app_name_already_taken } = await supabase
+        .from('supallama_apps')
+        .select('app_name')
+        .eq('app_name', app_name)
+
+      console.log('supallama_apps data')    
+      console.log(supallama_apps_with_same_name)
+
+      if (supallama_apps_with_same_name && supallama_apps_with_same_name.length > 0) {
+        return {
+          message: 'Argument Error: An app with this name already exists',
+          success: false,
+        }
+      }
+    } catch (error) {
+      return {
+        message: 'Database Error: Unable to check if an app with this name already exists',
+        success: false,
+      }
     }
-    console.log(newAppData)
+
+    // Insert new row in the supallama_apps table
+    try {
+      const { data: new_supallama_app, error: error_inserting_into_supallama_apps_table } = await supabase
+        .from('supallama_apps')
+        .insert([
+          { 
+            app_name: app_name,
+            app_status: app_status,
+            app_type: app_type,
+            github_username_for_transfer: github_username_for_transfer,
+            user_id: user_id,
+          }
+        ])
+        .select()
+      console.log('created new supallama app')
+      console.log(new_supallama_app)
+      
+      if (new_supallama_app) {
+        return {
+          message: '',
+          success: true,
+        }
+      } else {
+        return {
+          message: 'Database Error: Error creating new SupaLlama app',
+          success: false,
+        }
+      }
+      
+    } catch(error) {
+      return {
+        message: 'Database Error: Unable to create new SupaLlama app',
+        success: false,
+      }
+    }
   }
 }
