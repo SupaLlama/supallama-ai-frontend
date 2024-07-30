@@ -5,7 +5,11 @@
  * @see https://v0.dev/t/7nH6TF85U9a
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
+
+import { useEffect, useState } from "react"
+
 import Link from "next/link"
+
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
@@ -13,10 +17,40 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
+
 import NewAppButton from "@/app/dashboard/newAppButton"
+
 import { createNewApp } from "@/app/dashboard/actions"
 
+import { createClient } from '@/utils/supabase/client'
+
+type SupaLlamaApp = {
+  app_name: any
+  app_status: any
+  app_type: any
+  github_username_for_transfer: any
+}
+
+
 export default function DashboardPageComponent() {
+  
+  const [supallamaApps, setSupallamaApps] = useState<Array<SupaLlamaApp> | null>(null)
+  
+  useEffect(() => {
+    async function fetchSupallamaApps() {
+      const supabase = createClient()
+      let { data: supallama_apps, error } = await supabase
+        .from('supallama_apps')
+        .select('app_name, app_type, app_status, github_username_for_transfer')
+
+      console.log('client-side data fetch')
+      console.log(supallama_apps)
+    
+      setSupallamaApps(supallama_apps)
+    }
+    fetchSupallamaApps()
+  }, [])
+
   return (
     <div className="flex flex-col min-h-screen bg-indigo-50 dark:bg-gray-900">
       <header className="bg-indigo-600 text-white py-4 px-6 flex items-center justify-between">
@@ -47,30 +81,16 @@ export default function DashboardPageComponent() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>Acme Web App</TableCell>
-                    <TableCell>LangChain</TableCell>
-                    <TableCell>
-                      <Badge variant="outline">Created</Badge>
-                    </TableCell>
-                    <TableCell>2023-07-28</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Acme RAG ChatBot</TableCell>
-                    <TableCell>LangChain</TableCell>
-                    <TableCell>
-                      <Badge variant="outline">Pending</Badge>
-                    </TableCell>
-                    <TableCell>2023-07-25</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Acme ChatBot</TableCell>
-                    <TableCell>LangChain</TableCell>
-                    <TableCell>
-                      <Badge variant="secondary">Deployed</Badge>
-                    </TableCell>
-                    <TableCell>2023-07-22</TableCell>
-                  </TableRow>
+                  {supallamaApps?.map((app: SupaLlamaApp, i: number) => {
+                    return (
+                      <TableRow key={i}>
+                        <TableCell>{app.app_name}</TableCell>
+                        <TableCell>{app.app_type}</TableCell>
+                        <TableCell>{app.app_status}</TableCell>
+                        <TableCell>{app.github_username_for_transfer}</TableCell>
+                      </TableRow>
+                    )
+                  })}
                 </TableBody>
               </Table>
             </CardContent>

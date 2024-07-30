@@ -15,6 +15,6 @@ export default async function DashboardPage() {
   }
 
   return (
-    <DashboardPageComponent />
+    <DashboardPageComponent supallama_apps={null} />
   )
 }
