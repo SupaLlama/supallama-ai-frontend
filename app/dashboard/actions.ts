@@ -28,7 +28,23 @@ export async function createNewApp(prevState: any, formData: FormData) {
     console.log(app_type)
     console.log(github_username_for_transfer)
     console.log(user_id)
-  
+
+    if (app_name.trim().length === 0) {
+      return (
+        { message: 'Please enter a valid app name', success: false }
+      )
+    }
+    if (app_type.trim().length === 0) {
+      return (
+        { message: 'Please enter a valid app name', success: false }
+      )
+    }
+    if (github_username_for_transfer.trim().length === 0) {
+      return (
+        { message: 'Please enter a valid app name', success: false }
+      )
+    }
+
     // Check if an app with this name already exists
     try {
       let { data: supallama_apps_with_same_name, error: error_app_name_already_taken } = await supabase
@@ -69,9 +85,25 @@ export async function createNewApp(prevState: any, formData: FormData) {
       console.log('created new supallama app')
       console.log(new_supallama_app)
       
+      // If we were able to create the new app in Supabase,
+      // then we'll clone template repos for the new app
       if (new_supallama_app) {
+        const headers = new Headers()
+        headers.append('Content-Type', 'application/json')
+        headers.append('Accept', 'application/json')
         
-        await createAppTemplates(app_name, app_type, github_username_for_transfer)
+        const supaLlamaAiApiHostPort = process.env.SUPALLAMA_AI_API
+        const request = new Request(
+          `${supaLlamaAiApiHostPort}/github/create-repos-from-templates`, {
+            headers: headers,
+            method: 'POST',
+            mode: 'cors',
+            body: `{ "app_name": "${app_name}", "app_type": "${app_type}", "github_username_for_transfer": "${github_username_for_transfer}"}`
+          }
+        )
+      
+        const response = await fetch(request)
+        await response.json()
 
         return {
           message: '',
@@ -91,40 +123,4 @@ export async function createNewApp(prevState: any, formData: FormData) {
       }
     }
   }
-}
-
-export async function createAppTemplates(app_name: string, app_type: string, github_username_for_transfer: string) {
-  if (app_name.trim().length === 0) {
-    return (
-      { message: 'Please enter a valid app name', success: false }
-    )
-  }
-  if (app_type.trim().length === 0) {
-    return (
-      { message: 'Please enter a valid app name', success: false }
-    )
-  }
-  if (github_username_for_transfer.trim().length === 0) {
-    return (
-      { message: 'Please enter a valid app name', success: false }
-    )
-  }
-
-  const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
-  headers.append('Accept', 'application/json')
-  
-  const supaLlamaAiApiHostPort = process.env.SUPALLAMA_AI_API
-  const request = new Request(
-    `${supaLlamaAiApiHostPort}/github/create-repos-from-templates`, {
-      headers: headers,
-      method: 'POST',
-      mode: 'cors',
-      body: `{ "app_name": "${app_name}", "app_type": "${app_type}", "github_username_for_transfer": "${github_username_for_transfer}"}`
-    }
-  )
-
-  const response = await fetch(request)
-  await response.json()
-  return { errors: { name: '' }, success: true }
 }
