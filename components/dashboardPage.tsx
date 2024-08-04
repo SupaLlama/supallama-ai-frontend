@@ -41,8 +41,6 @@ const initialFormState = {
 
 export default function DashboardPageComponent() {
   const [supallamaApps, setSupallamaApps] = useState<Array<SupaLlamaApp> | null>(null)
-  const [refreshAppList, setRefreshAppList] = useState(false)
-  
   const [formState, formAction] = useFormState(createNewApp, initialFormState)
   
   
@@ -133,8 +131,8 @@ export default function DashboardPageComponent() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="langchain">LangChain</SelectItem>
-                      <SelectItem value="llamaindex">LlamaIndex</SelectItem>
-                      <SelectItem value="griptape">GripTape</SelectItem>
+                      <SelectItem disabled value="llamaindex">LlamaIndex</SelectItem>
+                      <SelectItem disabled value="griptape">GripTape</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

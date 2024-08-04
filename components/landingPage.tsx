@@ -15,20 +15,20 @@ export default function LandingPage() {
         <div className="container mx-auto flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="space-y-4 text-center md:text-left">
             <h1 className="text-4xl font-bold tracking-tighter text-indigo-100 sm:text-5xl md:text-6xl">
-              Supallama: The Ultimate Dev Tool SaaS
+              Supallama: Test drive LLM Tech Stacks Before Coding
             </h1>
             <p className="max-w-[600px] text-indigo-100/80 md:text-xl">
-              Streamline your development workflow with Supallama&apos;s powerful suite of tools. Boost productivity, improve
-              collaboration, and deliver better software, faster.
+              Spin up and evaluate full-stack LLM apps using different tech stacks, models, 
+              vector stores at the click of a button without any vendor lock-in!
             </p>
             <div className="flex flex-col gap-2 sm:flex-row">
-              <Link
+              {/* <Link
                 href="#"
                 className="inline-flex h-10 items-center justify-center rounded-md bg-indigo-100 px-8 text-sm font-medium text-indigo-500 shadow transition-colors hover:bg-indigo-100/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >
                 Request Access
-              </Link>
+              </Link> */}
               <Link
                 href="/login"
                 className="inline-flex h-10 items-center justify-center rounded-md border border-indigo-100 bg-indigo-100/10 px-8 text-sm font-medium text-indigo-100 shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
