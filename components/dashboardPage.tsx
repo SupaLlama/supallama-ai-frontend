@@ -132,7 +132,7 @@ export default function DashboardPageComponent() {
                     <SelectContent>
                       <SelectItem value="langchain">LangChain</SelectItem>
                       <SelectItem disabled value="llamaindex">LlamaIndex</SelectItem>
-                      <SelectItem disabled value="griptape">GripTape</SelectItem>
+                      <SelectItem value="griptape">Griptape</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
