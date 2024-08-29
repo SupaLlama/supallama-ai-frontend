@@ -23,11 +23,14 @@ export async function createNewApp(prevState: any, formData: FormData) {
     const github_username_for_transfer = (formData.get('githubUsername') as string).trim()
     const user_id = user.id 
   
-    console.log(app_name)
-    console.log(app_status)
-    console.log(app_type)
-    console.log(github_username_for_transfer)
-    console.log(user_id)
+    // Retrieve the session to retrieve and pass 
+    // the user's Access Token to the Python backend 
+    const { data: { session }, error: errorRetrievingSession }= await supabase.auth.getSession()
+  
+    if (errorRetrievingSession) {
+      redirect('/error')
+    }
+  
 
     if (app_name.trim().length === 0) {
       return (
@@ -98,7 +101,7 @@ export async function createNewApp(prevState: any, formData: FormData) {
             headers: headers,
             method: 'POST',
             mode: 'cors',
-            body: `{ "app_name": "${app_name}", "app_type": "${app_type}", "github_username_for_transfer": "${github_username_for_transfer}"}`
+            body: `{ "supallama_app_id": "${new_supallama_app[0].id}", "access_token": "${session?.access_token}", "app_name": "${app_name}", "app_type": "${app_type}", "github_username_for_transfer": "${github_username_for_transfer}"}`
           }
         )
       
