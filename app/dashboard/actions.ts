@@ -18,7 +18,7 @@ export async function createNewApp(prevState: any, formData: FormData) {
 
   if (user) {
     const app_name = (formData.get('appName') as string).trim()
-    const app_status = 'Initializing'
+    const app_status = 'Queued'
     const app_type = (formData.get('appType') as string).trim()
     const github_username_for_transfer = (formData.get('githubUsername') as string).trim()
     const user_id = user.id 
