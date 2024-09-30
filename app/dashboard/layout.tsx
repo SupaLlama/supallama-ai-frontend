@@ -17,7 +17,8 @@ export default function DashboardLayout({ children }: PropsType) {
           </h1>
           <nav className="flex items-center space-x-4">
             <Button variant="ghost" className="text-white hover:text-indigo-200">Dashboard</Button>
-            <Button variant="ghost" className="text-white hover:text-indigo-200">My Models</Button>
+            <Button variant="ghost" className="text-white hover:text-indigo-200">Models</Button>
+            <Button variant="ghost" className="text-white hover:text-indigo-200">Datasets</Button>
             <Button variant="ghost" className="text-white hover:text-indigo-200">Apps</Button>
             <Button 
               variant="default" 
