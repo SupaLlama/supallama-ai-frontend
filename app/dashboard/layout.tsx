@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { LogOut } from "lucide-react"
 
@@ -16,16 +16,13 @@ export default function DashboardLayout({ children }: PropsType) {
             <span className="mr-2" role="img" aria-label="Llama">🦙</span> SupaLlama.ai
           </h1>
           <nav className="flex items-center space-x-4">
-            <Button variant="ghost" className="text-white hover:text-indigo-200">Dashboard</Button>
-            <Button variant="ghost" className="text-white hover:text-indigo-200">Models</Button>
-            <Button variant="ghost" className="text-white hover:text-indigo-200">Datasets</Button>
-            <Button variant="ghost" className="text-white hover:text-indigo-200">Apps</Button>
-            <Button 
-              variant="default" 
-              className="bg-indigo-700 text-white hover:bg-indigo-800 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-indigo-600"
-            >
-              <LogOut className="mr-2 h-4 w-4" /> Sign Out
-            </Button>
+            <Link href="/dashboard" className="inline-flex h-10 items-center justify-center rounded-md px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" prefetch={false}>Dashboard</Link>
+            <Link href="/dashboard/models" className="inline-flex h-10 items-center justify-center rounded-md px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" prefetch={false}>Models</Link>
+            <Link href="/dashboard/datasets" className="inline-flex h-10 items-center justify-center rounded-md px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" prefetch={false}>Datasets</Link>
+            <Link href="/dashboard/apps" className="inline-flex h-10 items-center justify-center rounded-md px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" prefetch={false}>Apps</Link>
+            <Link href="/signout" className="inline-flex h-10 items-center justify-center rounded-md px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" prefetch={false}>
+              <LogOut className="mr-2 h-4 w-4"/> Sign Out 
+            </Link>
           </nav>
         </div>
       </header>
