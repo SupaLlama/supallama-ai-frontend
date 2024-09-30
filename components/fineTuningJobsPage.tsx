@@ -62,7 +62,7 @@ export default function FineTuningJobsPageComponent() {
   return (
     <main className="flex-grow container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-bold text-indigo-800">LLM Fine-Tuning Jobs</h2>
+        <h2 className="text-3xl font-bold text-indigo-800">TBA: Fine-Tuning Jobs</h2>
         <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
           <Plus className="mr-2 h-5 w-5" /> Create New Job
         </Button>

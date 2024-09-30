@@ -90,7 +90,7 @@ export default function FineTuningJobDetailsPageComponent() {
   return (
     <main className="flex-grow container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-bold text-indigo-800">Fine-Tuning Job: SupaLlama-7B-v2</h2>
+        <h2 className="text-3xl font-bold text-indigo-800">TBA: Fine-Tuning Job: SupaLlama-7B-v2</h2>
         <div className="space-x-4">
           <Button className="bg-red-600 hover:bg-red-700 text-white">
             <X className="mr-2 h-5 w-5" /> Cancel Job
