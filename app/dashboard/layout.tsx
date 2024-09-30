@@ -13,7 +13,7 @@ export default function DashboardLayout({ children }: PropsType) {
       <header className="bg-indigo-600 text-white p-6">
         <div className="container mx-auto flex items-center justify-between">
           <h1 className="text-3xl font-bold flex items-center">
-            <span className="mr-2" role="img" aria-label="Llama">🦙</span> SupaLlama.ai
+            <span className="mr-2" role="img" aria-label="Llama">🦙</span> SupaLlama
           </h1>
           <nav className="flex items-center space-x-4">
             <Link href="/dashboard" className="inline-flex h-10 items-center justify-center rounded-md px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" prefetch={false}>Dashboard</Link>
