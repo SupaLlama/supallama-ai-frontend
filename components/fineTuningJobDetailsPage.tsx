@@ -88,157 +88,131 @@ export default function FineTuningJobDetailsPageComponent() {
   const goToPreviousPage = () => setCurrentPage((page) => Math.max(page - 1, 1))
 
   return (
-    <div className="min-h-screen bg-indigo-50 flex flex-col">
-      <header className="bg-indigo-600 text-white p-6">
-        <div className="container mx-auto flex items-center justify-between">
-          <h1 className="text-3xl font-bold flex items-center">
-            <LlamaIcon />
-            SupaLlama
-          </h1>
-          <nav className="flex items-center space-x-4">
-            <Button variant="ghost" className="text-white hover:text-indigo-200">Dashboard</Button>
-            <Button variant="ghost" className="text-white hover:text-indigo-200">Models</Button>
-            <Button variant="ghost" className="text-white hover:text-indigo-200">Datasets</Button>
-            <Button 
-              variant="default" 
-              className="bg-indigo-700 text-white hover:bg-indigo-800 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-indigo-600"
-            >
-              <LogOut className="mr-2 h-4 w-4" /> Sign Out
-            </Button>
-          </nav>
+    <main className="flex-grow container mx-auto py-8 px-4">
+      <div className="flex justify-between items-center mb-8">
+        <h2 className="text-3xl font-bold text-indigo-800">Fine-Tuning Job: SupaLlama-7B-v2</h2>
+        <div className="space-x-4">
+          <Button className="bg-red-600 hover:bg-red-700 text-white">
+            <X className="mr-2 h-5 w-5" /> Cancel Job
+          </Button>
         </div>
-      </header>
+      </div>
 
-      <main className="flex-grow container mx-auto py-8 px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-indigo-800">Fine-Tuning Job: SupaLlama-7B-v2</h2>
-          <div className="space-x-4">
-            <Button className="bg-red-600 hover:bg-red-700 text-white">
-              <X className="mr-2 h-5 w-5" /> Cancel Job
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Job Details</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <fieldset className="border border-indigo-200 rounded-lg p-4">
+            <legend className="text-lg font-semibold text-indigo-800 px-2">SupaLlama-7B-v2 Fine-Tuning Information</legend>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-indigo-600">Job ID</label>
+                <p className="mt-1 text-sm text-gray-900">ft-job-001</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-indigo-600">Base Model</label>
+                <p className="mt-1 text-sm text-gray-900">SupaLlama-7B-v1</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-indigo-600">Dataset</label>
+                <p className="mt-1 text-sm text-gray-900">Enhanced General Knowledge QA</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-indigo-600">Start Time</label>
+                <p className="mt-1 text-sm text-gray-900">2024-03-15 09:30:00 UTC</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-indigo-600">Estimated End Time</label>
+                <p className="mt-1 text-sm text-gray-900">2024-03-16 09:30:00 UTC</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-indigo-600">Status</label>
+                <p className="mt-1 text-sm text-gray-900">
+                  <span className="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
+                    In Progress
+                  </span>
+                </p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-indigo-600">Current Step</label>
+                <p className="mt-1 text-sm text-gray-900">10 / 100</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-indigo-600">Current Performance</label>
+                <p className="mt-1 text-sm text-gray-900">Loss: 0.7, Accuracy: 95%</p>
+              </div>
+            </div>
+          </fieldset>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Training Progress</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">
+                  <Button variant="ghost" onClick={() => sortTrainingSteps("step")} className="hover:text-indigo-600">
+                    Step <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </TableHead>
+                <TableHead>
+                  <Button variant="ghost" onClick={() => sortTrainingSteps("loss")} className="hover:text-indigo-600">
+                    Loss <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </TableHead>
+                <TableHead>
+                  <Button variant="ghost" onClick={() => sortTrainingSteps("accuracy")} className="hover:text-indigo-600">
+                    Accuracy <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </TableHead>
+                <TableHead className="w-[200px]">
+                  <Button variant="ghost" onClick={() => sortTrainingSteps("timestamp")} className="hover:text-indigo-600">
+                    Timestamp <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {currentSteps.map((step) => (
+                <TableRow key={step.step}>
+                  <TableCell>{step.step}</TableCell>
+                  <TableCell>{step.loss.toFixed(2)}</TableCell>
+                  <TableCell>{(step.accuracy * 100).toFixed(2)}%</TableCell>
+                  <TableCell>{step.timestamp}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <div className="flex items-center justify-between space-x-2 py-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={goToPreviousPage}
+              disabled={currentPage === 1}
+            >
+              <ChevronLeft className="h-4 w-4 mr-2" />
+              Previous
+            </Button>
+            <span className="text-sm text-gray-600">
+              Page {currentPage} of {totalPages}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={goToNextPage}
+              disabled={currentPage === totalPages}
+            >
+              Next
+              <ChevronRight className="h-4 w-4 ml-2" />
             </Button>
           </div>
-        </div>
-
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>Job Details</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <fieldset className="border border-indigo-200 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-800 px-2">SupaLlama-7B-v2 Fine-Tuning Information</legend>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-indigo-600">Job ID</label>
-                  <p className="mt-1 text-sm text-gray-900">ft-job-001</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-indigo-600">Base Model</label>
-                  <p className="mt-1 text-sm text-gray-900">SupaLlama-7B-v1</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-indigo-600">Dataset</label>
-                  <p className="mt-1 text-sm text-gray-900">Enhanced General Knowledge QA</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-indigo-600">Start Time</label>
-                  <p className="mt-1 text-sm text-gray-900">2024-03-15 09:30:00 UTC</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-indigo-600">Estimated End Time</label>
-                  <p className="mt-1 text-sm text-gray-900">2024-03-16 09:30:00 UTC</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-indigo-600">Status</label>
-                  <p className="mt-1 text-sm text-gray-900">
-                    <span className="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
-                      In Progress
-                    </span>
-                  </p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-indigo-600">Current Step</label>
-                  <p className="mt-1 text-sm text-gray-900">10 / 100</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-indigo-600">Current Performance</label>
-                  <p className="mt-1 text-sm text-gray-900">Loss: 0.7, Accuracy: 95%</p>
-                </div>
-              </div>
-            </fieldset>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Training Progress</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[100px]">
-                    <Button variant="ghost" onClick={() => sortTrainingSteps("step")} className="hover:text-indigo-600">
-                      Step <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
-                  </TableHead>
-                  <TableHead>
-                    <Button variant="ghost" onClick={() => sortTrainingSteps("loss")} className="hover:text-indigo-600">
-                      Loss <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
-                  </TableHead>
-                  <TableHead>
-                    <Button variant="ghost" onClick={() => sortTrainingSteps("accuracy")} className="hover:text-indigo-600">
-                      Accuracy <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
-                  </TableHead>
-                  <TableHead className="w-[200px]">
-                    <Button variant="ghost" onClick={() => sortTrainingSteps("timestamp")} className="hover:text-indigo-600">
-                      Timestamp <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {currentSteps.map((step) => (
-                  <TableRow key={step.step}>
-                    <TableCell>{step.step}</TableCell>
-                    <TableCell>{step.loss.toFixed(2)}</TableCell>
-                    <TableCell>{(step.accuracy * 100).toFixed(2)}%</TableCell>
-                    <TableCell>{step.timestamp}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <div className="flex items-center justify-between space-x-2 py-4">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={goToPreviousPage}
-                disabled={currentPage === 1}
-              >
-                <ChevronLeft className="h-4 w-4 mr-2" />
-                Previous
-              </Button>
-              <span className="text-sm text-gray-600">
-                Page {currentPage} of {totalPages}
-              </span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={goToNextPage}
-                disabled={currentPage === totalPages}
-              >
-                Next
-                <ChevronRight className="h-4 w-4 ml-2" />
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </main>
-
-      <footer className="bg-indigo-100 text-indigo-600 py-4 text-center">
-        <p>&copy; 2024 SupaLlama. All rights reserved.</p>
-      </footer>
-    </div>
+        </CardContent>
+      </Card>
+    </main>
   )
 }
