@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
 
-import DashboardPageComponent from '@/components/dashboardPage'
+import AppDetailsPageComponent from '@/components/appDetailsPage'
 
 export default async function DashboardPage() {
 
@@ -15,6 +15,6 @@ export default async function DashboardPage() {
   }
 
   return (
-    <DashboardPageComponent />
+    <AppDetailsPageComponent />
   )
 }

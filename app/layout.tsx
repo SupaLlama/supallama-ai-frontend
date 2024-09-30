@@ -3,11 +3,10 @@
 import { ReactNode } from 'react'
 
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from 'next/font/google'
-import { Space_Mono } from 'next/font/google'
 
 import { Toaster } from 'react-hot-toast'
 
+import { Inter } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import './globals.css'
 
@@ -16,17 +15,16 @@ export const metadata: Metadata = {
   description: "Test drive LLM apps before writing code",
 };
 
-const fontHeading = Bricolage_Grotesque({
+const fontHeading = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-heading',
 })
 
-const fontBody = Space_Mono({
+const fontBody = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-body',
-  weight: "400",
 })
 
 type PropsType = {
