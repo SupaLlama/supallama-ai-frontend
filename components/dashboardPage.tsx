@@ -3,7 +3,7 @@ import { PlusCircle, Zap } from "lucide-react"
 
 export default function DashboardPageComponent() {
   return (
-    <div>
+    <main className="flex-grow flex flex-col items-center justify-center container mx-auto py-8 px-4 text-center">
       <h2 className="text-4xl font-bold text-indigo-800 mb-4">Welcome to SupaLlama</h2>
       <p className="text-xl text-indigo-600 mb-8">Create and manage your LLM models apps with ease. Generate new apps with your LLM models.</p>
       
@@ -17,6 +17,6 @@ export default function DashboardPageComponent() {
       </div>
 
       <p className="text-indigo-500 mt-8">Get started by creating a new model or generating an AI-powered app</p>
-    </div>
+    </main>
   )
 }

@@ -28,9 +28,7 @@ export default function DashboardLayout({ children }: PropsType) {
           </nav>
         </div>
       </header>
-      <main className="flex-grow flex flex-col items-center justify-center container mx-auto py-8 px-4 text-center">
         {children}
-      </main>
       <footer className="bg-indigo-100 text-indigo-600 py-4 text-center">
         <p>&copy; 2024 SupaLlama. All rights reserved.</p>
       </footer>
