@@ -10,15 +10,8 @@ export default function AIServiceLanding() {
       {/* Hero Section */}
       <section className="bg-indigo-600 text-white py-20 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">SupaLlama Managed AI Services</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6"><span className="mr-2" role="img" aria-label="Llama">🦙</span> SupaLlama Managed AI Services</h1>
           <p className="text-xl md:text-2xl mb-8">Empower Your Business with Cutting-Edge LLM Solutions</p>
-          <Image
-            src="/supallama-logo.svg"
-            width="600"
-            height="400"
-            alt="Supallama Hero"
-            className="mx-auto aspect-[3/2] overflow-hidden rounded-xl object-cover sm:w-full lg:max-w-[500px]"
-          />
           <Link 
             href="/login" 
             className="inline-flex h-12 items-center justify-center rounded-lg border border-indigo-100 bg-indigo-100/10 px-8 text-xl text-indigo-100 shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
@@ -86,7 +79,7 @@ export default function AIServiceLanding() {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">Choose Plan</Button>
+                  <Button disabled className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">Available by Invite Only</Button>
                 </CardFooter>
               </Card>
             ))}
@@ -98,9 +91,16 @@ export default function AIServiceLanding() {
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-indigo-800">Ready to Supercharge Your AI Projects?</h2>
-          <p className="text-xl mb-8 text-gray-600">Join SupaLlama AI Services today and transform your business with cutting-edge AI solutions.</p>
+          <p className="text-xl mb-8 text-gray-600">Request access to SupaLlama today and transform your business with cutting-edge AI solutions.</p>
+          <Image
+            src="/supallama-logo.svg"
+            width="600"
+            height="400"
+            alt="Supallama Hero"
+            className="mx-auto aspect-[3/2] overflow-hidden rounded-xl object-cover sm:w-full lg:max-w-[500px]"
+          />
           <Button className="bg-indigo-600 hover:bg-indigo-700 text-white text-lg py-6 px-8">
-            Start Your 30-Day Free Trial
+            Request an Invite to the Beta
           </Button>
         </div>
       </section>
