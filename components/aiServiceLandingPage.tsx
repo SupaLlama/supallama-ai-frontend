@@ -31,7 +31,7 @@ export default function AIServiceLanding() {
             {[
               { icon: <Database className="h-10 w-10 text-indigo-500" />, title: "Automated Dataset Generation", description: "Create high-quality datasets tailored to your needs" },
               { icon: <Layers className="h-10 w-10 text-indigo-500" />, title: "LLM Fine-Tuning & Deployment", description: "Customize and deploy state-of-the-art language models" },
-              { icon: <Globe className="h-10 w-10 text-indigo-500" />, title: "API & Full-Stack App Deployment", description: "Seamlessly deploy and host your AI-powered applications" },
+              { icon: <Globe className="h-10 w-10 text-indigo-500" />, title: "AI & Full-Stack App Hosting", description: "Seamlessly deploy and host your AI-powered applications" },
               { icon: <Code className="h-10 w-10 text-indigo-500" />, title: "Code Generation & Iteration", description: "Accelerate development with AI-assisted coding tools" },
               { icon: <Zap className="h-10 w-10 text-indigo-500" />, title: "Scalable Infrastructure", description: "Robust and scalable infrastructure for your AI projects" },
               { icon: <CheckCircle className="h-10 w-10 text-indigo-500" />, title: "Expert Support", description: "White-glove support from our team of AI specialists" },
