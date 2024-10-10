@@ -1,7 +1,7 @@
-import LandingPage from "@/components/landingPage";
+import AiServiceLandingPageComponent from "@/components/aiServiceLandingPage";
 
 export default function Home() {
   return (
-    <LandingPage />
+    <AiServiceLandingPageComponent />
   );
 }
