@@ -79,7 +79,7 @@ export default function AIServiceLanding() {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button disabled className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">Available by Invite Only</Button>
+                  <Link href="/login/signup" prefetch={false} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-large rounded-large py-3 inline-flex justify-center rounded">Choose Plan</Link>
                 </CardFooter>
               </Card>
             ))}
@@ -99,9 +99,10 @@ export default function AIServiceLanding() {
             alt="Supallama Hero"
             className="mx-auto aspect-[3/2] overflow-hidden rounded-xl object-cover sm:w-full lg:max-w-[500px]"
           />
-          <Button className="bg-indigo-600 hover:bg-indigo-700 text-white text-lg py-6 px-8">
+          <Link href="/login/signup" prefetch={false} className="bg-indigo-600 hover:bg-indigo-700 text-white text-xl rounded-large px-8 py-4 inline-flex justify-center rounded">Request an Invite to the Beta</Link>
+          {/* <Button className="bg-indigo-600 hover:bg-indigo-700 text-white text-lg py-6 px-8">
             Request an Invite to the Beta
-          </Button>
+          </Button> */}
         </div>
       </section>
     </div>

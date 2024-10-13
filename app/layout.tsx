@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast'
 import { Inter } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import './globals.css'
+import { CSPostHogProvider } from './providers';
 
 export const metadata: Metadata = {
   title: "🦙 SupaLlama",
@@ -34,16 +35,18 @@ type PropsType = {
 export default function Layout({ children }: PropsType) {
   return (
     <html lang="en">
-      <body 
-        className={cn(
-          'antialiased',
-          fontHeading.variable,
-          fontBody.variable
-        )}
-      >
-        {children}
-        <Toaster />
-      </body>
+      <CSPostHogProvider>
+        <body 
+          className={cn(
+            'antialiased',
+            fontHeading.variable,
+            fontBody.variable
+          )}
+        >
+          {children}
+          <Toaster />
+        </body>
+      </CSPostHogProvider>
     </html>
   )
 }
