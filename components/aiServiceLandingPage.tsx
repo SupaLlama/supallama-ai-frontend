@@ -10,8 +10,8 @@ export default function AIServiceLanding() {
       {/* Hero Section */}
       <section className="bg-indigo-600 text-white py-20 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6"><span className="mr-2" role="img" aria-label="Llama">🦙</span> SupaLlama Managed AI Services</h1>
-          <p className="text-xl md:text-2xl mb-8">Empower Your Business with Cutting-Edge LLM Solutions</p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6"><span className="mr-1" role="img" aria-label="Llama">🦙</span>SupaLlama AI Dev Tools & Services</h1>
+          <p className="text-xl md:text-2xl mb-8">Take Your AI Apps from Prototype to Production in Under an Hour</p>
           <Link 
             href="/login" 
             className="inline-flex h-12 items-center justify-center rounded-lg border border-indigo-100 bg-indigo-100/10 px-8 text-xl text-indigo-100 shadow-sm transition-colors hover:bg-indigo-100/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"

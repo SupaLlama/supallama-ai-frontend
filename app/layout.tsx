@@ -11,8 +11,8 @@ import { cn } from '@/lib/utils'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: "SupaLlama.ai",
-  description: "Test drive LLM apps before writing code",
+  title: "🦙 SupaLlama",
+  description: "🦙 AI Dev Tools & Managed Services",
 };
 
 const fontHeading = Inter({
