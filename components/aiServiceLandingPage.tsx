@@ -1,12 +1,41 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, Code, Database, Globe, Layers, Zap } from 'lucide-react'
+import { Book, CheckCircle, Code, Database, Github, Globe, Layers, Zap } from 'lucide-react'
 
 export default function AIServiceLanding() {
   return (
     <div className="min-h-screen bg-indigo-50">
+      {/* Top Menu Bar */}
+      <nav className="bg-white text-indigo-600 p-4 shadow-md border-b border-indigo-100">
+        <div className="container mx-auto flex justify-between items-center">
+          <Link href="/" className="flex items-center space-x-2">
+            <Image
+              src="/supallama-logo.png"
+              alt="SupaLlama Logo"
+              width={40}
+              height={40}
+            />
+            <span className="text-2xl font-bold">SupaLlama</span>
+          </Link>
+          <div className="space-x-4">
+            <Link href="https://github.com/supallama" className="hover:text-indigo-800 transition-colors">
+              
+              <Github className="inline-block mr-1" size={20} />
+              GitHub
+            </Link>
+            <Link href="https://docs.supallama.ai/" className="hover:text-indigo-800 transition-colors">
+              <Book className="inline-block mr-1" size={20} />
+              Docs
+            </Link>
+            <Link href="/login" className="hover:text-indigo-800 transition-colors">
+              Sign In
+            </Link>
+          </div>
+        </div>
+      </nav>      
+
+
       {/* Hero Section */}
       <section className="bg-indigo-600 text-white py-20 px-4">
         <div className="container mx-auto text-center">
@@ -14,7 +43,7 @@ export default function AIServiceLanding() {
           <p className="text-xl md:text-2xl mb-8">Take Your AI Apps from Prototype to Production in Under an Hour</p>
           <Link 
             href="/login/signup" 
-            className="inline-flex justify-center rounded-lg text-2xl font-medium px-8 py-3 bg-white hover:bg-indigo-100 text-indigo-600"
+            className="inline-flex justify-center rounded text-2xl font-medium px-8 py-3 bg-white hover:bg-indigo-100 text-indigo-600"
             prefetch={false}
           >
             Get Started
