@@ -1,4 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useFormState } from 'react-dom'
+
+import toast from 'react-hot-toast'
+
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -9,9 +13,26 @@ import { UserIcon, MailIcon, BuildingIcon, UsersIcon, MessageSquareIcon } from '
 import BetaInviteRequestSubmitButton from './betaInviteRequestSubmitButton'
 
 import { requestBetaInvite } from '@/app/login/signup/actions'
+import { type SignupFormStatus } from '@/app/login/signup/signupFormStatus'
 
 export default function BetaInviteRequestPageComponent() {
   const [companySize, setCompanySize] = useState('')
+
+  const initialFormState = { status: 'idle' } as SignupFormStatus
+  const [formState, formAction] = useFormState(requestBetaInvite, initialFormState)
+
+  useEffect(() => {
+    // Show the proper toast notification
+    if (formState.status === 'success') {
+      toast.success('Beta invite request submitted successfully!')
+    } else if (formState.status === 'error') {
+      toast.error('Error submitting beta invite request. Please try again.')
+    }
+  
+    // Reset the form's state to it's initial status
+    formState.status = initialFormState.status;
+
+  }, [initialFormState.status, formState])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-indigo-50 p-4">
@@ -20,7 +41,7 @@ export default function BetaInviteRequestPageComponent() {
           <CardTitle className="text-2xl font-bold">Request Beta Invite</CardTitle>
           <CardDescription className="text-indigo-200">Request an invite to join SupaLlama&apos;s exclusive beta program</CardDescription>
         </CardHeader>
-        <form action={requestBetaInvite}>
+        <form action={formAction}>
           <CardContent className="p-6 space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium text-indigo-800">Full Name</Label>

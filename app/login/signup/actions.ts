@@ -2,10 +2,11 @@
 
 import sgMail from '@sendgrid/mail'
 
-import { createClient } from '@/utils/supabase/server'
+import { type SignupFormStatus } from './signupFormStatus'
 
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
+
 
 interface BetaInviteRequestData {
   name: string
@@ -14,6 +15,7 @@ interface BetaInviteRequestData {
   companySize: string
   chatbotDescription: string
 }
+
 
 async function generateEmailText(betaInviteRequestData: BetaInviteRequestData) {
   return(
@@ -29,6 +31,7 @@ async function generateEmailText(betaInviteRequestData: BetaInviteRequestData) {
     + ':-)'
   )
 }
+
 
 async function sendBetaEmailConfirmation(recipient: string, body: string) {
   const message = {
@@ -60,21 +63,30 @@ async function sendBetaEmailNotification(body: string) {
 }
 
 
-export async function requestBetaInvite(formData: FormData) {
-  // TODO: validate form inputs
-  const betaInviteRequestData: BetaInviteRequestData = {
-    name: formData.get('name') as string,
-    email: formData.get('email') as string,
-    company: formData.get('company') as string,
-    companySize: formData.get('company-size') as string,
-    chatbotDescription: formData.get('chatbot-description') as string,    
+export async function requestBetaInvite(previousState: SignupFormStatus, formData: FormData) {
+  try {
+    // TODO: validate form inputs
+    const betaInviteRequestData: BetaInviteRequestData = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      company: formData.get('company') as string,
+      companySize: formData.get('company-size') as string,
+      chatbotDescription: formData.get('chatbot-description') as string,    
+    }
+
+    const emailBody = await generateEmailText(betaInviteRequestData)
+
+    // Send an email confirmation to email in the form
+    sendBetaEmailConfirmation(betaInviteRequestData.email, emailBody)
+
+    // Send an email notification to the SupaLlama Support team
+    sendBetaEmailNotification(emailBody)
+  
+    previousState.status = 'success'
+  } catch (error) {
+    console.error('Error requesting beta invite:', error)
+    previousState.status = 'error'
   }
 
-  const emailBody = await generateEmailText(betaInviteRequestData)
-
-  // Send an email confirmation to email in the form
-  sendBetaEmailConfirmation(betaInviteRequestData.email, emailBody)
-
-  // Send an email notification to the SupaLlama Support team
-  sendBetaEmailNotification(emailBody)
+  return previousState
 }
