@@ -14,7 +14,7 @@ export default function AIServiceLanding() {
           <p className="text-xl md:text-2xl mb-8">Take Your AI Apps from Prototype to Production in Under an Hour</p>
           <Link 
             href="/login/signup" 
-            className="inline-flex justify-center rounded-lg text-2xl font-medium px-8 py-3 bg-white hover:bg-indigo-100 text-indigo-600"
+            className="inline-flex justify-center rounded text-2xl font-medium px-8 py-3 bg-white hover:bg-indigo-100 text-indigo-600"
             prefetch={false}
           >
             Get Started
