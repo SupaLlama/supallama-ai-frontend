@@ -11,7 +11,7 @@ export default function AIServiceLanding() {
         <div className="container mx-auto flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/supallama-logo.png"
+              src="/supallama-logo-no-words.png"
               alt="SupaLlama Logo"
               width={40}
               height={40}
@@ -19,16 +19,16 @@ export default function AIServiceLanding() {
             <span className="text-2xl font-bold">SupaLlama</span>
           </Link>
           <div className="space-x-4">
-            <Link href="https://github.com/supallama" className="hover:text-indigo-800 transition-colors">
+            <Link href="https://github.com/supallama" className="hover:text-indigo-800 transition-colors font-bold">
               
               <Github className="inline-block mr-1" size={20} />
               GitHub
             </Link>
-            <Link href="https://docs.supallama.ai/" className="hover:text-indigo-800 transition-colors">
+            <Link href="https://docs.supallama.ai/" className="hover:text-indigo-800 transition-colors font-bold">
               <Book className="inline-block mr-1" size={20} />
               Docs
             </Link>
-            <Link href="/login" className="hover:text-indigo-800 transition-colors">
+            <Link href="/login" className="hover:text-indigo-800 transition-colors font-bold">
               Sign In
             </Link>
           </div>
