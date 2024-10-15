@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
 
-import FineTuningJobCreationWizardPageComponent from '@/components/fineTuningJobCreationWizard'
+import ModelCreationWizardPageComponent from '@/components/modelCreationWizardPage'
 
 export default async function DashboardPage() {
 
@@ -15,6 +15,6 @@ export default async function DashboardPage() {
   }
 
   return (
-    <FineTuningJobCreationWizardPageComponent />
+    <ModelCreationWizardPageComponent />
   )
 }
