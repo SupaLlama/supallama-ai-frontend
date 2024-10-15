@@ -1,6 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useFormState } from "react-dom"
+
+import { toast } from 'react-hot-toast'
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -9,22 +13,49 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
+import AppCreationWizardSubmitButton from "./appCreationWizardSubmitButton"
+
+import { createNewApp } from "@/app/dashboard/apps/new/actions"
+
+import { type AppCreationFormStatus } from "@/app/dashboard/apps/new/appCreationFormStatus"
+
+// type SupaLlamaApp = {
+//   app_name: any
+//   app_status: any
+//   app_type: any
+//   github_username_for_transfer: any
+// }
+
 const steps = [
   { title: "Basic Information", description: "Provide basic details about your app" },
-  { title: "Model Selection", description: "Choose the LLM model for your app" },
+  { title: "appType Selection", description: "Choose the LLM appType for your app" },
   { title: "Configuration", description: "Set up your app's configuration" },
   { title: "Review", description: "Review your app details before creation" },
 ]
 
 export default function AppCreationWizardPageComponent() {
+  const initialFormState = { status: 'idle' } as AppCreationFormStatus
+  const [formState, formAction] = useFormState(createNewApp, initialFormState)
+
   const [currentStep, setCurrentStep] = useState(0)
   const [appData, setAppData] = useState({
-    name: "",
-    description: "",
-    model: "",
+    appName: "",
+    githubUsername: "",
+    appType: "",
     apiKey: "",
     maxTokens: "2048",
   })
+
+  useEffect(() => { 
+    // Show the proper toast notification based on the form state
+    if (formState.status === 'success') {
+      toast.success('App generation queued successfully!')
+    } else if (formState.status === 'error') {
+      toast.error('Error creating app. Please try again.')
+    }
+  
+    formState.status = initialFormState.status // Reset the form state
+  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -47,11 +78,11 @@ export default function AppCreationWizardPageComponent() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("App data submitted:", appData)
-    // Here you would typically send the data to your backend
-  }
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   console.log("App data submitted:", appData)
+  //   // Here you would typically send the data to your backend
+  // }
 
   return (
     <main className="flex-grow container mx-auto py-8 px-4">
@@ -82,31 +113,31 @@ export default function AppCreationWizardPageComponent() {
           <CardDescription>{steps[currentStep].description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit}>
+          <form action={formAction}>
             {currentStep === 0 && (
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="name">App Name</Label>
-                  <Input id="name" name="name" value={appData.name} onChange={handleInputChange} placeholder="Enter app name" required />
+                  <Label htmlFor="appName">App Name</Label>
+                  <Input id="appName" name="appName" value={appData.appName} onChange={handleInputChange} placeholder="Enter app name" required />
                 </div>
                 <div>
-                  <Label htmlFor="description">Description</Label>
-                  <Textarea id="description" name="description" value={appData.description} onChange={handleInputChange} placeholder="Describe your app" required />
+                  <Label htmlFor="githubUsername">githubUsername</Label>
+                  <Textarea id="githubUsername" name="githubUsername" value={appData.githubUsername} onChange={handleInputChange} placeholder="Describe your app" required />
                 </div>
               </div>
             )}
             {currentStep === 1 && (
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="model">Select Model</Label>
-                  <Select name="model" value={appData.model} onValueChange={(value) => handleSelectChange("model", value)}>
+                  <Label htmlFor="appType">Select appType</Label>
+                  <Select name="appType" value={appData.appType} onValueChange={(value) => handleSelectChange("appType", value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a model" />
+                      <SelectValue placeholder="Select App Type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="supallama-7b">SupaLlama 7B</SelectItem>
-                      <SelectItem value="supallama-13b">SupaLlama 13B</SelectItem>
-                      <SelectItem value="supallama-70b">SupaLlama 70B</SelectItem>
+                      <SelectItem value="langchain-rag-chatbot">LangChain RAG ChatBot</SelectItem>
+                      <SelectItem value="langgraph-agentic-workflow">LangGraph Agentic Workflow</SelectItem>
+                      <SelectItem value="griptape-rag-chatbot">GripTape RAG ChatBot</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -127,9 +158,9 @@ export default function AppCreationWizardPageComponent() {
             {currentStep === 3 && (
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Review Your App Details</h3>
-                <p><strong>Name:</strong> {appData.name}</p>
-                <p><strong>Description:</strong> {appData.description}</p>
-                <p><strong>Model:</strong> {appData.model}</p>
+                <p><strong>App Name:</strong> {appData.appName}</p>
+                <p><strong>GitHub Username:</strong> {appData.githubUsername}</p>
+                <p><strong>App Type:</strong> {appData.appType}</p>
                 <p><strong>API Key:</strong> {appData.apiKey.replace(/./g, '*')}</p>
                 <p><strong>Max Tokens:</strong> {appData.maxTokens}</p>
               </div>
@@ -149,9 +180,7 @@ export default function AppCreationWizardPageComponent() {
               Next <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           ) : (
-            <Button type="submit" onClick={handleSubmit}>
-              Create App
-            </Button>
+            <AppCreationWizardSubmitButton type="submit" />
           )}
         </CardFooter>
       </Card>
