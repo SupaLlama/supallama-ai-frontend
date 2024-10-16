@@ -13,26 +13,27 @@ export async function createNewApp(prevState: AppCreationFormStatus, formData: F
 
   const { user } = auth_user_data
 
+  console.log(formData)
   if (user) {
-    const app_name = (formData.get('appName') as string).trim()
+    const app_name = formData.get('appName') as string
     const app_status = 'Queued'
-    const app_type = (formData.get('appType') as string).trim()
-    const github_username_for_transfer = (formData.get('githubUsername') as string).trim()
+    const app_type = formData.get('appType') as string
+    const github_username_for_transfer = formData.get('githubUsername') as string
     const user_id = user.id 
   
     // Retrieve the session to retrieve and pass 
     // the user's Access Token to the Python backend 
     const { data: { session }, error: errorRetrievingSession }= await supabase.auth.getSession()
   
-    if (app_name.trim().length === 0) {
+    if (app_name?.trim().length === 0) {
       prevState.status = 'error'
       return prevState
     }
-    if (app_type.trim().length === 0) {
+    if (app_type?.trim().length === 0) {
       prevState.status = 'error'
       return prevState
     }
-    if (github_username_for_transfer.trim().length === 0) {
+    if (github_username_for_transfer?.trim().length === 0) {
       prevState.status = 'error'
       return prevState
     }
